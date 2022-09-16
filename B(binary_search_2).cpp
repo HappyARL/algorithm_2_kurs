@@ -1,19 +1,20 @@
 #include <iostream>
 
-int BinarySearch(const int* begin, const int* end, int mid) {
-  if (*(begin) < *(end)) {
-    return 0;
+int BinarySearch(const int* begin, const int* end) {
+  int left = 0;
+  int right = end - begin - 1;
+  while (*(begin + left) >= *(begin + right)) {
+    int mid = (right + left) / 2;
+    if (*(begin + right) == 1) {
+      return right;
+    }
+    if (*(begin + left + mid) < *(begin + left + mid - 1) &&
+        *(begin + left + mid) < *(begin + left + mid + 1)) {
+      return left + mid;
+    }
+    left = --mid;
   }
-  if (*(begin + mid) < *(begin + mid - 1)) {
-    return mid;
-  }
-  if (*(begin + mid) > *(begin + mid + 1)) {
-    return mid + 1;
-  }
-  if (*begin > mid) {
-    BinarySearch(begin, begin + mid, mid / 2);
-  }
-  return BinarySearch(begin + mid, end, (mid + (end - begin)) / 2);
+  return 0;
 }
 int main() {
   int size;
@@ -22,7 +23,6 @@ int main() {
   for (int i = 0; i < size; i++) {
     std::cin >> arr[i];
   }
-  int mid_num = (size - 1) / 2;
-  std::cout << BinarySearch(arr, arr + size - 1, mid_num) << std::endl;
+  std::cout << BinarySearch(arr, arr + size) << std::endl;
   return 0;
 }
