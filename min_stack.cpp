@@ -1,24 +1,21 @@
+#include <algorithm>
 #include <iostream>
+#include <string>
 
 const int kLength = 2e5 + 5;
-int top = -1;
-int low = 1e9;
+int top = 0;
 int main_arr[kLength];
 int low_arr[kLength];
 
 void Push(int val) {
-  main_arr[++top] = val;
-  if (val <= low) {
-    low = val;
-    low_arr[top] = low;
-  } else {
-    low_arr[top] = low;
-  }
+  top++;
+  main_arr[top] = val;
+  low_arr[top] = std::min(low_arr[top - 1], main_arr[top]);
   std::cout << "ok" << std::endl;
 }
 
 void Pop() {
-  if (top == -1) {
+  if (top == 0) {
     std::cout << "error" << std::endl;
   } else {
     int pop_value = main_arr[top];
@@ -28,7 +25,7 @@ void Pop() {
 }
 
 int Back() {
-  if (top == -1) {
+  if (top == 0) {
     std::cout << "error" << std::endl;
   } else {
     std::cout << main_arr[top] << std::endl;
@@ -37,12 +34,12 @@ int Back() {
 }
 
 int Size() {
-  std::cout << top + 1 << std::endl;
+  std::cout << top << std::endl;
   return 0;
 }
 
 int Min() {
-  if (top == -1) {
+  if (top == 0) {
     std::cout << "error" << std::endl;
   } else {
     std::cout << low_arr[top] << std::endl;
@@ -51,18 +48,14 @@ int Min() {
 }
 
 void Clear() {
-  for (int i = 0; i < top; i++) {
-    main_arr[i] = 0;
-    low_arr[i] = 0;
-  }
-  top = -1;
-  low = 1;
+  top = 0;
   std::cout << "ok" << std::endl;
 }
 
 int main() {
   int test, num;
   std::cin >> test;
+  low_arr[0] = 1e9 + 9;
   while (test != 0) {
     std::string cmd;
     std::cin >> cmd;
