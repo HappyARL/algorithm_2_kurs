@@ -84,7 +84,6 @@ void shift(Stack l, Stack r) {
 }
 void enqueue(Stack l, Stack r, int val) {
   l.Push(val);
-  return 0;
 }
 void dequeue(Stack l, Stack r) {
   if(l.top == -1) {
