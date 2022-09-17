@@ -11,7 +11,6 @@ class Stack {
   int low_arr[kkLength /  2];
   Stack() {
     top = -1;
-    low = 1;
   }
 
   void Push(int val) {
@@ -66,13 +65,6 @@ class Stack {
     top = -1;
     low = 1;
     std::cout << "ok" << std::endl;
-  }
-
-  bool isFull() {
-    if(top == kkLength - 1) {
-      return true;
-    }
-    return false;
   }
 }st;
 
