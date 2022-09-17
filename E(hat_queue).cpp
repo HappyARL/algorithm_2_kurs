@@ -5,27 +5,23 @@ const int kkLength = 10;
 
 class Stack {
  public:
-  int top = -1;
-  int low = 1;
-  int main_arr[kkLength / 2];
-  int low_arr[kkLength /  2];
+  int top = 0;
+  int main_arr[kkLength];
+  int low_arr[kkLength];
   Stack() {
     top = -1;
+    low_arr[0] = 1e9 + 9;
   }
 
   void Push(int val) {
-    main_arr[++top] = val;
-    if (val <= low) {
-      low = val;
-      low_arr[top] = low;
-    } else {
-      low_arr[top] = low;
-    }
+    top++;
+    main_arr[top] = val;
+    low_arr[top] = std::min(low_arr[top - 1], main_arr[top]);
     std::cout << "ok" << std::endl;
   }
 
   int Pop() {
-    if (top == -1) {
+    if (top == 0) {
       std::cout << "error" << std::endl;
     } else {
       int pop_value = main_arr[top];
@@ -36,7 +32,7 @@ class Stack {
   }
 
   int Back() {
-    if (top == -1) {
+    if (top == 0) {
       std::cout << "error" << std::endl;
     } else {
       std::cout << main_arr[top] << std::endl;
@@ -45,28 +41,26 @@ class Stack {
   }
 
   int stack_size() {
-    return top + 1;
+    std::cout << top << std::endl;
+    return 0;
   }
 
   int stack_min() {
-    if (top == -1) {
+    if (top == 0) {
       std::cout << "error" << std::endl;
     } else {
-      return low_arr[top];
+      std::cout << low_arr[top] << std::endl;
     }
     return 0;
   }
 
   void stack_clear() {
-    for (int i = 0; i < top; i++) {
-      main_arr[i] = 0;
-      low_arr[i] = 0;
-    }
-    top = -1;
-    low = 1;
+    top = 0;
     std::cout << "ok" << std::endl;
   }
 }st;
+
+// +++++++++++++++++++++++++++++++++++++++++++++++
 
 void shift(Stack l, Stack r) {
   while(l.stack_size() > 0) {
@@ -78,16 +72,16 @@ void enqueue(Stack l, Stack r, int val) {
   l.Push(val);
 }
 void dequeue(Stack l, Stack r) {
-  if(l.top == -1) {
+  if(l.top == 0) {
     std::cout << "error" << std::endl;
   }
-  if(r.stack_size() == 0) {
+  if(r.top == -1) {
     shift(l, r);
   }
-  std::cout << r.Pop() << std::endl;
+  r.Pop();
 }
 int front(Stack l, Stack r) {
-  if(l.top == -1) {
+  if(l.top == 0) {
     std::cout << "error" << std::endl;
   }
   if(r.stack_size() == 0) {
@@ -102,13 +96,11 @@ int size(Stack l, Stack r) {
   return 0;
 }
 void clear(Stack l, Stack r) {
-  l.top = -1;
-  r.top = -1;
-  l.low = 1;
-  r.low = 1;  
+  l.stack_clear();
+  r.stack_clear(); 
 }
-int q_min(Stack l, Stack r) {
-  if(l.top == -1) {
+int min(Stack l, Stack r) {
+  if(l.top == 0) {
     std::cout << "error" << std::endl;
   }
   std::cout << (((l.stack_min()) < (r.stack_min())) ? (l.stack_min()) : (r.stack_min())) << std::endl;
@@ -139,7 +131,7 @@ int main() {
       clear(s1, s2);
     }
     if (cmd == "min") {
-      q_min(s1, s2);
+      min(s1, s2);
     }
     test--;
   }

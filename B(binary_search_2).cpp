@@ -3,26 +3,34 @@
 int BinarySearch(const int* begin, const int* end) {
   int left = 0;
   int right = end - begin - 1;
-  while (*(begin + left) >= *(begin + right)) {
-    int mid = (right + left) / 2;
-    if (*(begin + right) == 1) {
-      return right;
-    }
-    if (*(begin + left + mid) < *(begin + left + mid - 1) &&
-        *(begin + left + mid) < *(begin + left + mid + 1)) {
-      return left + mid;
-    }
-    left = --mid;
+  if (*(begin) == 1) {
+    return 0;
   }
-  return 0;
+  while (left <= right) {
+    int mid = (right + left) / 2;
+    if (*(begin + mid - 1) > *(begin + mid)) {
+      return mid;
+    }
+    if (*(begin + mid) > *(begin + mid + 1)) {
+      return mid + 1;
+    }
+    if (*(begin + mid) > *(begin + right)) {
+      left = mid + 1;
+    }
+    if (*(begin + mid) < *(begin + right)) {
+      right = mid - 1;
+    }
+  }
+  return -1;
 }
 int main() {
   int size;
   std::cin >> size;
-  int arr[100000] = {};
+  int* arr = new int[size];
   for (int i = 0; i < size; i++) {
     std::cin >> arr[i];
   }
   std::cout << BinarySearch(arr, arr + size) << std::endl;
+  delete[] arr;
   return 0;
 }
