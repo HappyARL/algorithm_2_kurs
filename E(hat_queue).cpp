@@ -28,7 +28,6 @@ class Stack {
       top--;
       return pop_value;
     }
-    return 0;
   }
 
   int Back() {

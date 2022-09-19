@@ -21,7 +21,6 @@ int BinarySearch(const int* begin, const int* end) {
       right = mid - 1;
     }
   }
-  return -1;
 }
 int main() {
   int size;
