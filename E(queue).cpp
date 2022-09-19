@@ -16,7 +16,6 @@ class Stack {
     top++;
     main_arr[top] = val;
     low_arr[top] = std::min(low_arr[top - 1], main_arr[top]);
-    std::cout << "ok" << std::endl;
   }
 
   int Pop() {
@@ -34,7 +33,7 @@ class Stack {
     if (top == 0) {
       std::cout << "error" << std::endl;
     } else {
-      std::cout << main_arr[top] << std::endl;
+      return main_arr[top];
     }
     return 0;
   }
@@ -47,7 +46,7 @@ class Stack {
     if (top == 0) {
       std::cout << "error" << std::endl;
     } else {
-      std::cout << low_arr[top] << std::endl;
+      return low_arr[top];
     }
     return 0;
   }
@@ -63,10 +62,6 @@ class Queue {
   Stack l;
   Stack r; 
  public:
-  Queue() {
-    l.top = 0;
-    r.top = 0;
-  }
   void shift(Stack l, Stack r) {
     while(l.Stack_Size() > 0) {
       r.Push(l.Pop());
@@ -75,18 +70,19 @@ class Queue {
   }
   void enqueue(int num) {
     l.Push(num);
+    std::cout << "ok" << std::endl;
   }
   int dequeue() {
     if(l.top == 0) {
       std::cout << "error" << std::endl;    
     }
-    if(r.top == 0) {
+    if(r.Stack_Size() == 0) {
       shift(l, r);
     }
     std::cout << r.Pop() << std::endl;
     return 0;
   }
-  int front() {
+  void front() {
     if(l.top == 0) {
       std::cout << "error" << std::endl;    
     }
@@ -94,16 +90,17 @@ class Queue {
   }
   int size() {
     std::cout << l.Stack_Size() + r.Stack_Size() << std::endl;
+    return 0;
   }
   void clear() {
-    l.top = 0;
-    std::cout << "ok" << std::endl;
+    l.Stack_Clear();
   }
   int min() {
     if(l.top == 0) {
       std::cout << "error" << std::endl;    
     }
     std::cout << l.Stack_Min() << std::endl;
+    return 0;
   }
 };
 int main() {
