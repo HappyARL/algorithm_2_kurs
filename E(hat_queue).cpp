@@ -54,7 +54,6 @@ class Stack {
     std::cout << "ok" << std::endl;
   }
 };
-
 class Queue {
  private:
   Stack l_;
@@ -66,33 +65,33 @@ class Queue {
     std::cout << "ok" << std::endl;
   }
   void Dequeue() {
-    if (l_.top == 0) {
-      std::cout << "error" << std::endl;
-    } else {
-      if (r_.top == 0) {
-        while (r_.StackSize() == 0) {
-          while (l_.StackSize() != 0) {
-            int num = l_.Pop();
-            r_.Push(num);
-          }
+    if (l_.StackSize() == 0 && r_.StackSize() == 0) {
+      std::cout << "error\n";
+    } else if (r_.StackSize() == 0) {
+      while (r_.StackSize() == 0) {
+        while (l_.StackSize() != 0) {
+          int num = l_.Pop();
+          r_.Push(num);
         }
       }
-      std::cout << r_.Pop() << std::endl;
+      std::cout << r_.Pop() << "\n";
+    } else {
+      std::cout << r_.Pop() << "\n";
     }
   }
   void Front() {
-    if (r_.StackSize() != 0) {
-      while (l_.StackSize() == 0) {
-        while (r_.StackSize() != 0) {
-          int num = r_.Pop();
-          l_.Push(num);
+    if (l_.StackSize() == 0 && r_.StackSize() == 0) {
+      std::cout << "error" << std::endl;
+    } else if (r_.StackSize() == 0 && l_.StackSize() != 0) {
+      while (r_.StackSize() == 0) {
+        while (l_.StackSize() != 0) {
+          int num = l_.Pop();
+          r_.Push(num);
         }
       }
-    }
-    if (l_.top == 0) {
-      std::cout << "error" << std::endl;
+      std::cout << r_.Back() << std::endl;
     } else {
-      std::cout << l_.Back() << std::endl;
+      std::cout << r_.Back() << std::endl;
     }
   }
   int Size() {
@@ -125,6 +124,27 @@ class Queue {
       std::cout << l_.StackMin() << std::endl;
     }
   }
+  /*void Min() {
+    if (r_.StackSize() != 0) {
+      if (l_.StackSize() == 0) {
+        std::cout << r_.StackMin() << std::endl;
+      } else {
+        std::cout << std::min(l_.StackMin(), r_.StackMin());
+      }
+    } else {
+      if (r_.StackSize() == 0) {
+        std::cout << "error" << std::endl;
+      } else {
+        while (l_.StackSize() == 0) {
+          while (r_.StackSize() != 0) {
+            int num = r_.Pop();
+            l_.Push(num);
+          }
+        }
+        std::cout << l_.StackMin() << std::endl;
+      }
+    }
+  }*/
 };
 int main() {
   Queue q;
@@ -156,5 +176,3 @@ int main() {
   }
   return 0;
 }
-
-//comment
