@@ -30,9 +30,8 @@ class BinaryHeap {
       i = Parent(i);
     }
   }
-  int Min() {
+  void Min() {
     std::cout << harr[0] << std::endl;
-    return 0;
   }
   int ExtractMin() {
     if (heap_size == 1) {
