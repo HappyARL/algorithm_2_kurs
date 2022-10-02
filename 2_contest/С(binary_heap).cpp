@@ -15,7 +15,7 @@ class BinaryHeap {
   int Parent(int i) { return (i - 1) / 2; }
   int Left(int i) { return (2 * i + 1); }
   int Right(int i) { return (2 * i + 2); }
-  void Swap(int* x, int* y) {
+  void swap(int* x, int* y) {
     int temp = *x;
     *x = *y;
     *y = temp;
@@ -26,7 +26,7 @@ class BinaryHeap {
     harr[i] = num;
     heap_count[i] = num_cmd;
     while (i != 0 && harr[Parent(i)] > harr[i]) {
-      Swap(&harr[i], &harr[Parent(i)]);
+      swap(&harr[i], &harr[Parent(i)]);
       i = Parent(i);
     }
   }
@@ -50,7 +50,7 @@ class BinaryHeap {
     }
     harr[i] -= d;
     while (i != 0 && harr[Parent(i)] > harr[i]) {
-      Swap(&harr[i], &harr[Parent(i)]);
+      swap(&harr[i], &harr[Parent(i)]);
       i = Parent(i);
     }
   }
