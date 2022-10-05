@@ -1,19 +1,40 @@
 #include <iostream>
+#include <vector>
 
-int Compare(const void* x1, const void* x2) { return (*(int*)x1 - *(int*)x2); }
+int Partition(std::vector<int>& arr, int start, int end) {
+  int x = arr[start];
+  int i = start, j;
+  for (j = start + 1; j < end; j++) {
+    if (arr[j] <= x) {
+      ++i;
+      std::swap(arr[i], arr[j]);
+    }
+  }
+  std::swap(arr[i], arr[start]);
+  return i;
+}
+
+void QuickSort(std::vector<int>& arr, int start, int end) {
+  int r;
+  if (start < end) {
+    r = Partition(arr, start, end);
+    QuickSort(arr, start, r);
+    QuickSort(arr, r + 1, end);
+  }
+}
 
 int main() {
-  int i = 0, length;
+  int i = 0, length, num;
   std::cin >> length;
-  int* arr = new int[length];
+  std::vector<int> arr;
   while (i != length) {
-    std::cin >> arr[i];
+    std::cin >> num;
+    arr.push_back(num);
     i++;
   }
-  qsort(arr, length, sizeof(int), Compare);
+  QuickSort(arr, 0, length);
   for (int i = 0; i < length; i++) {
     std::cout << arr[i] << ' ';
   }
-  delete[] arr;
   return 0;
 }
