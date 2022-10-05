@@ -1,7 +1,9 @@
+#include <algorithm>
 #include <iostream>
+#include <vector>
 
 int size;
-long long heap[1003];
+std::vector<long long> heap;
 
 void ShiftUp() {
   int i = size - 1;
@@ -35,14 +37,16 @@ void ShiftDown() {
   }
 }
 
-void Insert(long long a, int k) {
+void Insert(long long num, int k) {
   if (size < k) {
-    heap[size++] = a;
+    heap.push_back(num);
+    size++;
     ShiftUp();
-  } else if (a < heap[0]) {
+  } else if (num < heap[0]) {
     std::swap(heap[0], heap[--size]);
     ShiftDown();
-    heap[size++] = a;
+    heap.push_back(num);
+    size++;
     ShiftUp();
   }
 }
@@ -95,8 +99,8 @@ int main() {
     Insert(a, k);
     a0 = a;
   }
-  MergeSort(0, n - 1);
-  for (int i = 1; i < n; i++) {
+  MergeSort(0, size - 1);
+  for (int i = 0; i < size; i++) {
     std::cout << heap[i] << " ";
   }
 }

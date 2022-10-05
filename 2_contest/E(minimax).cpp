@@ -1,140 +1,129 @@
-/*#include <iostream>
+#include <iostream>
 #include <vector>
 
-void Swap(int* a, int* b) {
-  int temp = *b;
-  *b = *a;
-  *a = temp;
-}
+std::vector<int> arr;
 
-void HeapifyMax(std::vector<int>& arr, int i) {
+void HeapifyMax(int i) {
   int size = arr.size();
   int largest = i;
-  int l = 2 * i + 1;
-  int r = 2 * i + 2;
-  if (l < size && arr[l] > arr[largest]) {
-    largest = l;
+  if (2 * i + 1 < size && arr[2 * i + 1] > arr[largest]) {
+    largest = 2 * i + 1;
   }
-  if (r < size && arr[r] > arr[largest]) {
-    largest = r;
+  if (2 * i + 2 < size && arr[2 * i + 2] > arr[largest]) {
+    largest = 2 * i + 2;
   }
   if (largest != i) {
-    Swap(&arr[i], &arr[largest]);
-    HeapifyMax(arr, largest);
+    std::swap(arr[i], arr[largest]);
+    HeapifyMax(largest);
   }
 }
 
-void HeapifyMin(std::vector<int>& arr, int i) {
+void HeapifyMin(int i) {
   int size = arr.size();
   int largest = i;
-  int l = 2 * i + 1;
-  int r = 2 * i + 2;
-  if (l < size && arr[l] < arr[largest]) {
-    largest = l;
+  if (2 * i + 1 < size && arr[2 * i + 1] < arr[largest]) {
+    largest = 2 * i + 1;
   }
-  if (r < size && arr[r] < arr[largest]) {
-    largest = r;
+  if (2 * i + 2 < size && arr[2 * i + 2] < arr[largest]) {
+    largest = 2 * i + 2;
   }
   if (largest != i) {
-    Swap(&arr[i], &arr[largest]);
-    HeapifyMin(arr, largest);
+    std::swap(arr[i], arr[largest]);
+    HeapifyMin(largest);
   }
 }
 
-void HeapMin(std::vector<int>& arr) {
-  int size = arr.size();
-  for (int i = size / 2 - 1; i >= 0; i--) {
-    HeapifyMin(arr, i);
-  }
-}
-
-void HeapMax(std::vector<int>& arr) {
-  int size = arr.size();
-  for (int i = size / 2 - 1; i >= 0; i--) {
-    HeapifyMax(arr, i);
-  }
-}
-
-void Insert(std::vector<int>& arr, int num) {
+void Insert(int num) {
   int size = arr.size();
   if (size == 0) {
     arr.push_back(num);
   } else {
     arr.push_back(num);
     for (int i = size / 2 - 1; i >= 0; i--) {
-      HeapifyMax(arr, i);
+      HeapifyMax(i);
     }
   }
   std::cout << "ok" << std::endl;
 }
 
-void GetMin(std::vector<int>& arr) {
+void GetMin() {
   if (arr.empty()) {
     std::cout << "error" << std::endl;
   } else {
-    HeapMin(arr);
+    int size = arr.size();
+    for (int i = size / 2 - 1; i >= 0; i--) {
+      HeapifyMin(i);
+    }
     std::cout << arr[0] << std::endl;
   }
 }
 
-void ExtractMin(std::vector<int>& arr) {
-  if (arr.empty()) {
-    std::cout << "error" << std::endl;
-  }
-  HeapMin(arr);
-  std::cout << arr[0] << std::endl;
-  int size = arr.size();
-  int i;
-  for (i = 0; i < size; i++) {
-    if (arr[0] == arr[i]) {
-      break;
-    }
-  }
-  Swap(&arr[i], &arr[size - 1]);
-  arr.pop_back();
-  for (int i = size / 2 - 1; i >= 0; i--) {
-    HeapifyMax(arr, i);
-  }
-}
-
-void GetMax(std::vector<int>& arr) {
+void ExtractMin() {
   if (arr.empty()) {
     std::cout << "error" << std::endl;
   } else {
-    HeapMax(arr);
+    int size = arr.size();
+    for (int i = size / 2 - 1; i >= 0; i--) {
+      HeapifyMin(i);
+    }
+    std::cout << arr[0] << std::endl;
+    int i;
+    for (i = 0; i < size; i++) {
+      if (arr[0] == arr[i]) {
+        break;
+      }
+    }
+    std::swap(arr[i], arr[size - 1]);
+    arr.pop_back();
+    for (int i = size / 2 - 1; i >= 0; i--) {
+      HeapifyMax(i);
+    }
+  }
+}
+
+void GetMax() {
+  if (arr.empty()) {
+    std::cout << "error" << std::endl;
+  } else {
+    int size = arr.size();
+    for (int i = size / 2 - 1; i >= 0; i--) {
+      HeapifyMax(i);
+    }
     std::cout << arr[0] << std::endl;
   }
 }
 
-void ExtractMax(std::vector<int>& arr) {
+void ExtractMax() {
   if (arr.empty()) {
     std::cout << "error" << std::endl;
-  }
-  HeapMax(arr);
-  std::cout << arr[0] << std::endl;
-  int size = arr.size();
-  int i;
-  for (i = 0; i < size; i++) {
-    if (arr[0] == arr[i]) {
-      break;
+  } else {
+    int size = arr.size();
+    for (int i = size / 2 - 1; i >= 0; i--) {
+      HeapifyMax(i);
     }
-  }
-  Swap(&arr[i], &arr[size - 1]);
-  arr.pop_back();
-  for (int i = size / 2 - 1; i >= 0; i--) {
-    HeapifyMax(arr, i);
+    std::cout << arr[0] << std::endl;
+    int i;
+    for (i = 0; i < size; i++) {
+      if (arr[0] == arr[i]) {
+        break;
+      }
+    }
+    std::swap(arr[i], arr[size - 1]);
+    arr.pop_back();
+    for (int i = size / 2 - 1; i >= 0; i--) {
+      HeapifyMax(i);
+    }
   }
 }
 
-void Clear(std::vector<int>& arr) {
+void Clear() {
   arr.clear();
   std::cout << "ok" << std::endl;
 }
 
-void Size(std::vector<int>& arr) { std::cout << arr.size() << std::endl; }
+void Size() { std::cout << arr.size() << std::endl; }
 
 int main() {
-  std::vector<int> arr;
   int test, num;
   std::cin >> test;
   while (test != 0) {
@@ -142,92 +131,87 @@ int main() {
     std::cin >> cmd;
     if (cmd == "insert") {
       std::cin >> num;
-      Insert(arr, num);
-    }
-    if (cmd == "extract_min") {
-      ExtractMin(arr);
-    }
-    if (cmd == "get_min") {
-      GetMin(arr);
-    }
-    if (cmd == "extract_max") {
-      ExtractMax(arr);
-    }
-    if (cmd == "get_max") {
-      GetMax(arr);
-    }
-    if (cmd == "size") {
-      Size(arr);
+      Insert(num);
+    } else if (cmd == "extract_min") {
+      ExtractMin();
+    } else if (cmd == "get_min") {
+      GetMin();
+    } else if (cmd == "extract_max") {
+      ExtractMax();
+    } else if (cmd == "get_max") {
+      GetMax();
+    } else if (cmd == "size") {
+      Size();
     } else if (cmd == "clear") {
-      Clear(arr);
+      Clear();
     }
+    --test;
   }
   return 0;
 }
-**********************************************
-*/
+
+/*
 #include <iostream>
 #include <vector>
 
+std::vector<int> heap_min;
+std::vector<int> heap_max;
 
-  std::vector<int> heap_min;
-  std::vector<int> heap_max;
+void HeapifyMax(int i) {
+  int size = heap_max.size();
+  int largest = i;
+  if (2 * i + 1 < size && heap_max[2 * i + 1] > heap_max[largest]) {
+    largest = 2 * i + 1;
+  }
+  if (2 * i + 2 < size && heap_max[2 * i + 2] > heap_max[largest]) {
+    largest = 2 * i + 2;
+  }
+  if (largest != i) {
+    std::swap(heap_max[i], heap_max[largest]);
+    HeapifyMax(largest);
+  }
+}
 
-  void HeapifyMax(int i) {
-    int size = heap_max.size();
-    int largest = i;
-    if (2 * i + 1 < size && heap_max[2 * i + 1] > heap_max[largest]) {
-      largest = 2 * i + 1;
+void HeapifyMin(int i) {
+  int size = heap_min.size();
+  int largest = i;
+  if (2 * i + 1 < size && heap_min[2 * i + 1] < heap_min[largest]) {
+    largest = 2 * i + 1;
+  }
+  if (2 * i + 2 < size && heap_min[2 * i + 2] < heap_min[largest]) {
+    largest = 2 * i + 2;
+  }
+  if (largest != i) {
+    std::swap(heap_min[i], heap_min[largest]);
+    HeapifyMin(largest);
+  }
+}
+
+void Insert(int num) {
+  int size = heap_max.size();
+  if (size == 0) {
+    heap_max.push_back(num);
+    heap_min.push_back(num);
+  } else {
+    heap_max.push_back(num);
+    for (int i = size / 2 - 1; i >= 0; i--) {
+      HeapifyMax(i);
     }
-    if (2 * i + 2 < size && heap_max[2 * i + 2] > heap_max[largest]) {
-      largest = 2 * i + 2;
-    }
-    if (largest != i) {
-      std::swap(heap_max[i], heap_max[largest]);
-      HeapifyMax(largest);
+    heap_min.push_back(num);
+    for (int i = size / 2 - 1; i >= 0; i--) {
+      HeapifyMin(i);
     }
   }
+  std::cout << "ok" << std::endl;
+}
 
-  void HeapifyMin(int i) {
-    int size = heap_min.size();
-    int largest = i;
-    if (2 * i + 1 < size && heap_min[2 * i + 1] < heap_min[largest]) {
-      largest = 2 * i + 1;
-    }
-    if (2 * i + 2 < size && heap_min[2 * i + 2] < heap_min[largest]) {
-      largest = 2 * i + 2;
-    }
-    if (largest != i) {
-      std::swap(heap_min[i], heap_min[largest]);
-      HeapifyMin(largest);
-    }
+void GetMin() {
+  if (heap_min.empty()) {
+    std::cout << "error" << std::endl;
+  } else {
+    std::cout << heap_min[0] << std::endl;
   }
-
-  void Insert(int num) {
-    int size = heap_max.size();
-    if (size == 0) {
-      heap_max.push_back(num);
-      heap_min.push_back(num);
-    } else {
-      heap_max.push_back(num);
-      for (int i = size / 2 - 1; i >= 0; i--) {
-        HeapifyMax(i);
-      }
-      heap_min.push_back(num);
-      for (int i = size / 2 - 1; i >= 0; i--) {
-        HeapifyMin(i);
-      }
-    }
-    std::cout << "ok" << std::endl;
-  }
-
-  void GetMin() {
-    if (heap_min.empty()) {
-      std::cout << "error" << std::endl;
-    } else {
-      std::cout << heap_min[0] << std::endl;
-    }
-  }
+}
 
   void ExtractMin() {
     if (heap_min.empty()) {
@@ -328,7 +312,7 @@ int main() {
   }
   return 0;
 }
-/*
+///////////////////////////////////////////
 #include <iostream>
 #include <vector>
 
