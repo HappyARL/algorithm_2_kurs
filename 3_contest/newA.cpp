@@ -1,33 +1,54 @@
-#include <iostream>
+//
+// Created by Артур Кулапин on 24.10.2022.
+//
 
+#ifndef TEACHING_TREES_TREAP_H_
+#define TEACHING_TREES_TREAP_H_
+
+#include <random>
+#include <utility>
+
+template <typename T>
 class Treap {
  public:
- void Insert(int num, int prior) {
-   Node* T;
-   T->num = num;
-   T->prior = prior;
-   std::pair<Node*, Node*> trees = Split(root_, prior);
-   root_ = Merge(Merge(trees.first, T), trees.second);
- }
- void TrepPrint() {
-   Print(root_);  
- }
+  bool Find(const T& elem) {
+    return Find(root_, elem) != nullptr;
+  }
+
+  void Insert(const T& elem) {
+    if (Find(elem)) {
+      return;
+    }
+    auto trees = Split(root_, elem);
+    root_ = Merge(Merge(trees.first, new Node(elem)), trees.second);
+  }
+
+  void Erase(const T& elem) {
+    if (!Find(elem)) {
+      return;
+    }
+    auto trees = Split(root_, elem);
+    Node* node = trees.second;
+    trees.second = trees.second->right;
+    delete node;
+    root_ = Merge(trees.first, trees.second);
+  }
+
  private:
   struct Node {
-    explicit Node(const int num, const int prior) {}
+    explicit Node(const T& value) : value(value), priority(std::rand()) {}
+
     Node* left = nullptr;
     Node* right = nullptr;
-    int num;
-    int prior;
+    T value;
+    int priority;
   };
-  
-  Node* root_;
-  
-  std::pair<Node*, Node*> Split(Node* node, int key) {
-    if(node == nullptr) {
+
+  static std::pair<Node*, Node*> Split(Node* node, const T& key) {
+    if (node == nullptr) {
       return {nullptr, nullptr};
     }
-    if(node->prior < key) {
+    if (node->value < key) {
       std::pair<Node*, Node*> split_tree = Split(node->right, key);
       Node* left_tree = node;
       left_tree->right = split_tree.first;
@@ -39,7 +60,7 @@ class Treap {
     return {split_tree.first, right_tree};
   }
 
-  Node* Merge(Node* left, Node* right) {
+  static Node* Merge(Node* left, Node* right) {
     if (left == nullptr && right == nullptr) {
       return nullptr;
     }
@@ -49,7 +70,7 @@ class Treap {
     if (right == nullptr) {
       return left;
     }
-    if (left->num < right->num) {
+    if (left->priority < right->priority) {
       left->right = Merge(left->right, right);
       return left;
     }
@@ -57,38 +78,20 @@ class Treap {
     return right;
   }
 
-  Node* Print(Node* node) {
-    bool right = 1, left = 1;
+  static Node* Find(Node* node, const T& key) {
     if (node == nullptr) {
+      return nullptr;
+    }
+    if (node->value == key) {
       return node;
     }
-    if (node->left == nullptr) {
-      node->left->num = 0;
-      left = 0;
+    if (node->value > key) {
+      return Find(node->left, key);
     }
-    if (node->right == nullptr) {
-      node->left->num = 0;
-      right = 0;
-    }
-    std::cout << node->num << node->left->num << node->right->num << std::endl;
-    if (left) {
-      return Print(node->left);
-    }
-    if (right) {
-      return Print(node->right);
-    }
+    return Find(node->right, key);
   }
+
+  Node* root_;
 };
 
-int main() {
-  Treap tp;
-  int N;
-  std::cin >> N;
-  while (N != 0) {
-    int num, priority;
-    std::cin >> num >> priority;
-    tp.Insert(num, priority);
-    --N;
-  }
-  tp.TrepPrint();
-}
+#endif //TEACHING_TREES_TREAP_H_
