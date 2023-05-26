@@ -4,7 +4,7 @@
 
 class Graph {
 private:
-  std::vector<std::vector<int>> neighbors_;
+  std::vector<std::vector<int> > adj_list_;
   std::vector<bool> visited_;
   std::vector<int> result_;
   bool cycle_;
@@ -18,7 +18,7 @@ public:
 };
 
 Graph::Graph(int points) {
-  neighbors_.resize(points);
+  adj_list_.resize(points);
   visited_.resize(points);
   cycle_ = false;
 }
@@ -28,8 +28,8 @@ Graph::~Graph() {}
 void Graph::AddConnection(int up, int down) {
   int index_up = up - 1;
   int index_down = down - 1;
-  if (std::find(neighbors_[index_up].begin(), neighbors_[index_up].end(), index_down) == neighbors_[index_up].end()) {
-    neighbors_[index_up].push_back(index_down);
+  if (std::find(adj_list_[index_up].begin(), adj_list_[index_up].end(), index_down) == adj_list_[index_up].end()) {
+    adj_list_[index_up].push_back(index_down);
   }
 }
 
@@ -64,7 +64,7 @@ void Graph::Cycle() {
 void Graph::DFS(int index, std::vector<bool>& black) {
   visited_[index] = true;
   black[index] = true;
-  for (int neighbor : neighbors_[index]) {
+  for (int neighbor : adj_list_[index]) {
     if (!cycle_) {
       if (black[neighbor]) {
         result_.push_back(index);

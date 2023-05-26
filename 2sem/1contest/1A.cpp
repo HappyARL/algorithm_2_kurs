@@ -3,9 +3,9 @@
 
 class Graph {
  private:
-  std::vector<int> answer;
-  std::vector<std::vector<int> > connections;
-  std::vector<bool> black;
+  std::vector<int> result;
+  std::vector<std::vector<int> > adj_list;
+  std::vector<bool> visited;
 
  public:
   Graph(int planets);
@@ -17,16 +17,16 @@ class Graph {
 };
 
 Graph::Graph(int planets) {
-  answer = std::vector<int> ();
-  connections.resize(planets);
-  black.resize(planets);
+  result = std::vector<int> ();
+  adj_list.resize(planets);
+  visited.resize(planets);
 }
 
 Graph::~Graph() {}
 
 bool Graph::Exists(int vec, int index) {
-  for (size_t i = 0; i < connections[vec].size(); ++i) {
-    if (connections[vec].at(i) == index) {
+  for (size_t i = 0; i < adj_list[vec].size(); ++i) {
+    if (adj_list[vec].at(i) == index) {
       return true;
     }
   }
@@ -37,39 +37,39 @@ void Graph::AddConnection(int up, int down) {
   int index_up = up - 1;
   int down_index = down - 1;
   if (!Exists(index_up, down)) {
-    connections[index_up].push_back(down);
-    connections[down_index].push_back(up);
+    adj_list[index_up].push_back(down);
+    adj_list[down_index].push_back(up);
   }
 }
 // write bfs instead of dfs
 void Graph::DFS(int start, int end) {
   int i = start - 1;
-  if (black[i]) {
+  if (visited[i]) {
     return;
   }
-  black[i] = true;
-  answer.push_back(start);
-  for (size_t j = 0; j < connections[i].size(); ++j) {
-    if (connections[i].at(j) == end) {
-      answer.push_back(end);
+  visited[i] = true;
+  result.push_back(start);
+  for (size_t j = 0; j < adj_list[i].size(); ++j) {
+    if (adj_list[i].at(j) == end) {
+      result.push_back(end);
       return;
     } else {
-      int index = connections[i].at(j) - 1;
-       if (!black[index]) {
-        DFS(connections[i].at(j), end);  
+      int index = adj_list[i].at(j) - 1;
+       if (!visited[index]) {
+        DFS(adj_list[i].at(j), end);  
        }
     }    
   }
 }
 
 void Graph::Print() {
-  if (answer.size() == 0) {
+  if (result.size() == 0) {
     std::cout << "-1" << std::endl;
   } else {
-    std::cout << answer.size() - 1 << std::endl;
+    std::cout << result.size() - 1 << std::endl;
     int index = 0;
-    while (index < answer.size()) {
-      std::cout << answer[index] << " ";
+    while (index < result.size()) {
+      std::cout << result[index] << " ";
       ++index;
     }
     std::cout << std::endl;

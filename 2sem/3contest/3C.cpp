@@ -193,10 +193,10 @@ T MST_KRUSKAL(Graph<T> graph) {
 }
 
 int main() {
-  int64_t verteces;
+  int64_t vertices;
   int64_t edges;
-  std::cin >> verteces >> edges;
-  Graph<int64_t> graph(verteces);
+  std::cin >> vertices >> edges;
+  Graph<int64_t> graph(vertices);
   while (edges != 0) {
     int64_t vertex_a, vertex_b, weight;
     std::cin >> vertex_a >> vertex_b >> weight;
