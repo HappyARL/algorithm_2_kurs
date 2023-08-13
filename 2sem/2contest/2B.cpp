@@ -1,89 +1,74 @@
-#include <climits>
 #include <iostream>
 #include <vector>
+#include <set>
+#include <limits>
 
 class Graph {
  private:
-  std::vector<std::vector<std::pair<int, int> > > connections_;
-  std::vector<bool> visited_;
+  std::vector<std::vector<std::pair<int64_t, int64_t>>> connections_;
 
  public:
-  Graph(int value);
+  Graph(int64_t value);
   ~Graph();
-  bool Exists(int vec, int index);
-  void AddConnection(int point_a, int point_b, int weight);
-  std::vector<int> Dijkstra(int start_point);
+  void AddConnection(int64_t point64_t_a, int64_t point64_t_b, int64_t weight);
+  std::vector<int64_t> Dijkstra(int64_t start_point64_t);
 };
 
-Graph::Graph(int value) {
-  value = value + 1;
+Graph::Graph(int64_t value) {
   connections_.resize(value);
-  visited_.resize(value);
 }
 
 Graph::~Graph() {}
 
-bool Graph::Exists(int vec, int index) {
-  for (size_t i = 0; i < connections_[vec].size(); ++i) {
-    if (connections_[vec].at(i).first == index) {
-      return true;
-    }
-  }
-  return false;
+void Graph::AddConnection(int64_t point64_t_a, int64_t point64_t_b, int64_t weight) {
+  connections_[point64_t_a].emplace_back(point64_t_b, weight);
+  connections_[point64_t_b].emplace_back(point64_t_a, weight);
 }
 
-void Graph::AddConnection(int point_a, int point_b, int weight) {
-  if (!Exists(point_a, point_b)) {
-    connections_[point_a].push_back(std::make_pair(point_b, weight));
-    connections_[point_b].push_back(std::make_pair(point_a, weight));
-  }
-}
+std::vector<int64_t> Graph::Dijkstra(int64_t start_point64_t) {
+  std::vector<int64_t> answer(connections_.size(), std::numeric_limits<int64_t>::max());
+  answer[start_point64_t] = 0;
+  std::set<std::pair<int64_t, int64_t>> distance;
+  distance.emplace(0, start_point64_t);
 
-std::vector<int> Graph::Dijkstra(int start_point) {
-  std::vector<int> answer;
-  answer.resize(connections_.size());
-  for (size_t i = 0; i < connections_.size(); ++i) {
-    answer[i] = INT_MAX;
-  }
-  answer[start_point] = 0;
-  for (; start_point < (int)connections_.size(); ++start_point) {
-    if (!visited_[start_point]) {
-      for (size_t j = 0; j < connections_[start_point].size(); ++j) {
-        int sum = answer[start_point] + connections_[start_point].at(j).second;
-        if (sum < answer[connections_[start_point].at(j).first]) {
-          answer[connections_[start_point].at(j).first] = sum;
-        }
+  while (!distance.empty()) {
+    int64_t index = distance.begin()->second;
+    distance.erase(distance.begin());
+    for (const auto& edge : connections_[index]) {
+      int64_t to = edge.first;
+      int64_t weight = edge.second;
+      if (answer[index] + weight < answer[to]) {
+        distance.erase(std::make_pair(answer[to], to));
+        answer[to] = answer[index] + weight;
+        distance.emplace(answer[to], to);
       }
-      visited_[start_point] = true;
     }
   }
   return answer;
 }
 
 int main() {
-  int rooms, connections, virus;
+  int64_t rooms, connections, virus;
   std::cin >> rooms >> connections >> virus;
-  std::vector<int> virus_room;
-  while (virus != 0) {
-    int room;
-    std::cin >> room;
-    virus_room.push_back(room);
-    --virus;
+  std::vector<int64_t> virus_room(virus);
+  for (int64_t i = 0; i < virus; ++i) {
+    std::cin >> virus_room[i];
   }
-  Graph graph(rooms);
+  Graph graph(rooms + 1);
   while (connections != 0) {
-    int room_out, room_in, weight;
+    int64_t room_out, room_in, weight;
     std::cin >> room_out >> room_in >> weight;
     graph.AddConnection(room_out, room_in, weight);
     --connections;
   }
-  int sus, aid;
+  int64_t sus, aid;
   std::cin >> sus >> aid;
-  std::vector<int> tmp = graph.Dijkstra(aid);
+  std::vector<int64_t> tmp = graph.Dijkstra(aid);
   bool flag = true;
-  for (size_t i = 0; i < virus_room.size(); ++i) {
-    if (tmp[sus] > tmp[virus_room[i]] || tmp[sus] == tmp[virus_room[i]]) {
+  for (int64_t room : virus_room) {
+    if (tmp[sus] >= tmp[room]) {
       flag = false;
+      break;
     }
   }
   if (flag) {
@@ -93,33 +78,3 @@ int main() {
   }
   return 0;
 }
-
-/*
-int main() {
-  int rooms = 6, connections = 5, virus = 1;
-  std::vector<int> virus_room;
-  while (virus != 0) {
-    virus_room.push_back(6);
-    --virus;
-  }
-  Graph graph(rooms);
-  graph.AddConnection(1,2,20);
-  graph.AddConnection(2,3,2);
-  graph.AddConnection(3,4,1);
-  graph.AddConnection(2,5,1);
-  graph.AddConnection(5,6,3);
-  int sus = 4, aid = 1;
-  std::vector<int> tmp = graph.Dijkstra(aid);
-  bool flag = false;
-  for (size_t i = 0; i < virus_room.size(); ++i) {
-    if (tmp[sus] < tmp[virus_room[i]]) {
-      flag = true;
-    }
-  }
-  if (flag) {
-    std::cout << tmp[sus] << std::endl;
-  } else {
-    std::cout << "-1" << std::endl;
-  }
-  return 0;
-}*/

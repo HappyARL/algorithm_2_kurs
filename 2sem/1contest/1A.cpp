@@ -1,171 +1,91 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 
 class Graph {
  private:
-  std::vector<int> result;
-  std::vector<std::vector<int> > adj_list;
-  std::vector<bool> visited;
+  std::vector<std::vector<size_t>> adj_list;
+  size_t total_planet_num;
 
  public:
-  Graph(int planets);
+  Graph(size_t planet_num);
   ~Graph();
-  bool Exists(int vec, int index);
-  void AddConnection(int up, int down);
-  void DFS(int start, int end);
-  void Print();
+  bool Exists(size_t planet_a, size_t planet_b);
+  void AddEdge(size_t planet_a, size_t planet_b);
+  void BFS(size_t start, size_t finish);
 };
 
-Graph::Graph(int planets) {
-  result = std::vector<int> ();
-  adj_list.resize(planets);
-  visited.resize(planets);
+Graph::Graph(size_t planet_num) : total_planet_num(planet_num) {
+  adj_list.resize(planet_num);
 }
 
 Graph::~Graph() {}
 
-bool Graph::Exists(int vec, int index) {
-  for (size_t i = 0; i < adj_list[vec].size(); ++i) {
-    if (adj_list[vec].at(i) == index) {
+bool Graph::Exists(size_t planet_a, size_t planet_b) {
+  for (size_t i : adj_list[planet_a]) {
+    if (i == planet_b)
       return true;
-    }
   }
   return false;
 }
 
-void Graph::AddConnection(int up, int down) {
-  int index_up = up - 1;
-  int down_index = down - 1;
-  if (!Exists(index_up, down)) {
-    adj_list[index_up].push_back(down);
-    adj_list[down_index].push_back(up);
-  }
-}
-// write bfs instead of dfs
-void Graph::DFS(int start, int end) {
-  int i = start - 1;
-  if (visited[i]) {
-    return;
-  }
-  visited[i] = true;
-  result.push_back(start);
-  for (size_t j = 0; j < adj_list[i].size(); ++j) {
-    if (adj_list[i].at(j) == end) {
-      result.push_back(end);
-      return;
-    } else {
-      int index = adj_list[i].at(j) - 1;
-       if (!visited[index]) {
-        DFS(adj_list[i].at(j), end);  
-       }
-    }    
+void Graph::AddEdge(size_t planet_a, size_t planet_b) {
+  if (!Exists(planet_a, planet_b)) {
+    adj_list[planet_a].push_back(planet_b);
+    adj_list[planet_b].push_back(planet_a);
   }
 }
 
-void Graph::Print() {
-  if (result.size() == 0) {
-    std::cout << "-1" << std::endl;
-  } else {
-    std::cout << result.size() - 1 << std::endl;
-    int index = 0;
-    while (index < result.size()) {
-      std::cout << result[index] << " ";
-      ++index;
+void Graph::BFS(size_t start, size_t finish) {
+  std::queue<size_t> queue;
+  queue.push(start);
+
+  std::vector<int> visited(total_planet_num, -1);
+  std::vector<size_t> planets(total_planet_num);
+  visited[start] = 0;
+
+  while (!queue.empty()) {
+    size_t v = queue.front();
+    queue.pop();
+    for (size_t u : adj_list[v]) {
+      if (visited[u] == -1) {
+        queue.push(u);
+        visited[u] = visited[v] + 1;
+        planets[u] = v;
+      }
     }
-    std::cout << std::endl;
+  }
+
+  if (visited[finish] == -1) {
+    std::cout << -1 << std::endl;
+  } else {
+    size_t length = 0;
+    std::vector<size_t> ans;
+    while (finish != start) {
+      ans.push_back(finish);
+      finish = planets[finish];
+      ++length;
+    }
+    std::cout << length << '\n';
+    std::cout << start + 1 << " ";
+    for (size_t i = ans.size(); i > 0; --i) {
+      std::cout << ans[i - 1] + 1 << " ";
+    }
   }
 }
 
 int main() {
-  int planets, jumps;
-  std::cin >> planets >> jumps;
-  int start, end;
-  std::cin >> start >> end;
-  Graph graph(planets);
-  while (jumps != 0) {
-    int up, down;
-    std::cin >> up >> down;
-    graph.AddConnection(up, down);
-    --jumps;
+  size_t planet_num, jump_num;
+  std::cin >> planet_num >> jump_num;
+  Graph graph(planet_num);
+  size_t start, finish;
+  std::cin >> start >> finish;
+  while (jump_num != 0) {
+    size_t planet_a, planet_b;
+    std::cin >> planet_a >> planet_b;
+    graph.AddEdge(planet_a - 1, planet_b - 1);
+    --jump_num;
   }
-  std::cout << "inserft DONE" << std::endl;
-  graph.DFS(start - 1, end - 1);
-  std::cout << "dfs DONE" << std::endl;
-  graph.Print();
-  std::cout << "print DONE" << std::endl;
+  graph.BFS(start - 1, finish - 1);
   return 0;
 }
-
-
-// vector of vecrot like hashmap with buckeatsa but without hashfuncßß
-/*
-
-const int kLength = 2e5 + 5;
-
-class Stack {
- private:
-  int top_;
-  int* main_arr_;
-
- public:
-  Stack();
-  ~Stack();
-  void Push(int value);
-  void Pop();
-  void Print();
-};
-
-Stack::Stack() {
-  top_ = 0;
-  main_arr_ = new int[kLength];
-}
-
-Stack::~Stack() {
-  delete[] main_arr_;
-}
-
-void Stack::Push(int value) {
-  top_++;
-  main_arr_[top_] = value;
-}
-
-void Stack::Pop() {
-  if (top_ == 0) {
-    std::cout << "error" << std::endl;
-  } else {
-    int pop_value = main_arr_[top_];
-    top_--;
-  }
-}
-
-void Stack::Print() {
-  if (top_ == 0) {
-    std::cout << "-1" << std::endl;
-  } else {
-    std::cout << top_ - 1 << std::endl;
-    int index = 0;
-    while (index < top_) {
-      std::cout << main_arr_[index] << " ";
-      ++index;
-    }
-    std::cout << std::endl;
-  }
-}
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-
-
-int main() {
-  int planets = 4;
-  int jumps = 5;
-  int start = 1;
-  int end = 4;
-  Graph gr(planets);
-  gr.AddConnection(1, 3);
-  gr.AddConnection(3, 2);
-  gr.AddConnection(2, 4);
-  gr.AddConnection(2, 1);
-  gr.AddConnection(2, 3);
-  gr.DFS(start, end);
-  gr.Print();
-  return 0;
-}
-*/

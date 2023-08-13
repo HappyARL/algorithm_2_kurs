@@ -6,6 +6,8 @@ template <typename T>
 struct Vertex {
   T root;
   T strength;
+
+  Vertex(T ver_root, T ver_strength) : root(ver_root), strength(ver_strength) {}
 };
 
 template <typename T>
@@ -17,25 +19,24 @@ struct Edge {
 template <typename T>
 class DSU {
  private:
-  std::vector<Vertex<T> > verteces;
+  std::vector<Vertex<T> > vertices;
 
  public:
   DSU(T students);
   ~DSU();
   void Unite(T student_a, T student_b, T power);
   Vertex<T> Find(T student_a);
-  T FriendshipPower(T student_a);
   bool Ask(T vertex_a, T vertex_b);
 };
 
 template <typename T>
 DSU<T>::DSU(T students) {
   Vertex<T> point;
-  verteces.resize(students);
+  vertices.resize(students);
   for (int i = 0; i < students; ++i) {
     point.root = i;
     point.strength = 0;
-    verteces[i] = point;
+    vertices[i] = point;
   }
 }
 
@@ -44,23 +45,23 @@ DSU<T>::~DSU() {}
 
 template <typename T>
 void DSU<T>::Unite(T student_a, T student_b, T power) {
-  T root_a = Find(student_a).root;
-  T root_b = Find(student_b).root;
-  if (root_a != root_b) {
-    verteces[root_b].root = root_a;
-    T total_power = verteces[root_b].strength + power;
-    verteces[root_a].strength += total_power;
+  Vertex<T> root_a = Find(student_a);
+  Vertex<T> root_b = Find(student_b);
+  if (root_a.root != root_b.root) {
+    vertices[root_b.root].root = root_a.root;
+    vertices[root_a.root].strength += vertices[root_b.root].strength + power;
   } else {
-    verteces[root_a].strength += power;
+    vertices[root_a.root].strength += power;
   }
 }
 
+
 template <typename T>
 Vertex<T> DSU<T>::Find(T student_a) {
-  if (verteces[student_a].root != student_a) {
-    verteces[student_a] = Find(verteces[student_a].root);
+  if (vertices[student_a].root != student_a) {
+    vertices[student_a] = Find(vertices[student_a].root);
   }
-  return verteces[student_a];
+  return vertices[student_a];
 }
 
 template <typename T>
@@ -77,15 +78,15 @@ class Graph {
  private:
  public:
   std::vector<std::vector<Vertex<T> > > connections;
-  Graph(T verteces);
+  Graph(T vertices);
   ~Graph();
   bool Exists(T vertex, T index);
   void AddConnection(T vertex_a, T vertex_b, T weight);
 };
 
 template <typename T>
-Graph<T>::Graph(T verteces) {
-  connections.resize(verteces);
+Graph<T>::Graph(T vertices) {
+  connections.resize(vertices);
 }
 
 template <typename T>
@@ -106,9 +107,7 @@ void Graph<T>::AddConnection(T vertex_a, T vertex_b, T weight) {
   T index_a = vertex_a - 1;
   T index_b = vertex_b - 1;
   if (!Exists(index_a, index_b)) {
-    Vertex<T> tmp;
-    tmp.root = index_b;
-    tmp.strength = weight;
+    Vertex<T> tmp(index_b, weight);
     connections[index_a].push_back(tmp);
     tmp.root = index_a;
     tmp.strength = weight;
@@ -126,13 +125,11 @@ class CompareVertex {
 
 template <typename T>
 T MST_PRIM(Graph<T> graph) {
-  int count = (int)graph.connections.size();
+  int count = static_cast<int>(graph.connections.size());
   std::priority_queue<Vertex<T>, std::vector<Vertex<T> >, CompareVertex<T> > pqueue;
   std::vector<bool> visited(count, false);
   T sum = 0;
-  Vertex<T> first_vertex;
-  first_vertex.root = 0;
-  first_vertex.strength = 0;
+  Vertex<T> first_vertex(0, 0);
   pqueue.push(first_vertex);
   while (!pqueue.empty()) {
     T u = pqueue.top().root;
@@ -145,9 +142,7 @@ T MST_PRIM(Graph<T> graph) {
         T v = x.root;
         T weight = x.strength;
         if (!visited[v]) {
-          Vertex<T> tmp;
-          tmp.root = v;
-          tmp.strength = weight;
+          Vertex<T> tmp(v, weight);
           pqueue.push(tmp);
         }
       }
@@ -204,15 +199,15 @@ int main() {
     --edges;
   }
   std::cout << MST_PRIM(graph) << std::endl;
-  std::cout << MST_KRUSKAL(graph) << std::endl;
+  //std::cout << MST_KRUSKAL(graph) << std::endl;
   return 0;
 }
 
 /*
 int main() {
-  int verteces = 4;
+  int vertices = 4;
   int edges = 4;
-  Graph<int> graph(verteces);
+  Graph<int> graph(vertices);
   graph.AddConnection(1, 2, 1);
   graph.AddConnection(2, 3, 2);
   graph.AddConnection(3, 4, 5);

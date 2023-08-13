@@ -1,116 +1,99 @@
-#include <algorithm>
 #include <iostream>
 #include <vector>
 
 class Graph {
-private:
-  std::vector<std::vector<int> > adj_list_;
+ private:
+  std::vector<std::vector<int>> adj_list_;
   std::vector<bool> visited_;
+  std::vector<bool> recursion_stack_;
   std::vector<int> result_;
-  bool cycle_;
 
-public:
-  Graph(int points);
+ public:
+  Graph(int vertices);
   ~Graph();
-  void AddConnection(int up, int down);
-  void Cycle();
-  void DFS(int start, std::vector<bool>& black);
+  bool Exists(int vec, int index);
+  void AddEdge(int up, int down);
+  bool Cycle();
+  bool DFS(int index);
+  void Print();
 };
 
-Graph::Graph(int points) {
-  adj_list_.resize(points);
-  visited_.resize(points);
-  cycle_ = false;
+Graph::Graph(int vertices) {
+  adj_list_.resize(vertices);
+  visited_.resize(vertices, false);
+  recursion_stack_.resize(vertices, false);
 }
 
 Graph::~Graph() {}
 
-void Graph::AddConnection(int up, int down) {
-  int index_up = up - 1;
-  int index_down = down - 1;
-  if (std::find(adj_list_[index_up].begin(), adj_list_[index_up].end(), index_down) == adj_list_[index_up].end()) {
-    adj_list_[index_up].push_back(index_down);
+bool Graph::Exists(int vec, int index) {
+  for (const auto& iter : adj_list_[vec]) {
+    if (iter == index) {
+      return true;
+    }
+  }
+  return false;
+}
+
+void Graph::AddEdge(int up, int down) {
+  if (!Exists(up, down)) {
+    adj_list_[up].push_back(down);
   }
 }
 
-void Graph::Cycle() {
-  int size = (int)visited_.size();
-  for (int i = 0; i < size; ++i) {
-    std::vector<bool> black(size);
-    if (!cycle_) {
-      if (!visited_[i]) {
-        DFS(i, black);
+bool Graph::Cycle() {
+  for (size_t v = 0; v < adj_list_.size(); ++v) {
+    if (!visited_[v] && DFS(v)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Graph::DFS(int index) {
+  if (recursion_stack_[index]) {
+    return true;
+  }
+
+  if (!visited_[index]) {
+    visited_[index] = true;
+    recursion_stack_[index] = true;
+    result_.push_back(index);
+
+    for (int u : adj_list_[index]) {
+      if (DFS(u)) {
+        return true;
       }
     }
   }
-  if (cycle_) {
-    std::cout << "YES" << std::endl;
-    int size = (int)result_.size();
-    bool check = false;
-    for (int i = 0; i < size - 1; ++i) {
-      if (result_[i] == result_.back()) {
-        check = true;
-      }
-      if (check) {
-        std::cout << result_[i] + 1 << " ";
-      }
+  recursion_stack_[index] = false;
+  return false;
+}
+
+void Graph::Print() {
+  if (Cycle()) {
+    std::cout << "YES" << '\n';
+    for (size_t i = 0; i < result_.size(); ++i) {
+      std::cout << result_[i] + 1 << " ";
     }
-    std::cout << std::endl;
   } else {
-    std::cout << "NO" << std::endl;
-  }
-}
-
-void Graph::DFS(int index, std::vector<bool>& black) {
-  visited_[index] = true;
-  black[index] = true;
-  for (int neighbor : adj_list_[index]) {
-    if (!cycle_) {
-      if (black[neighbor]) {
-        result_.push_back(index);
-        result_.push_back(neighbor);
-        cycle_ = true;
-      } else if (!visited_[neighbor]) {
-        result_.push_back(index);
-        DFS(neighbor, black);
-      }
-    }
+    std::cout << "NO" << '\n';
   }
 }
 
 int main() {
-  int points, roads;
-  std::cin >> points >> roads;
-  Graph graph(points);
-  while (roads != 0) {
+  int vertices, edges;
+  std::cin >> vertices >> edges;
+  Graph gr(vertices);
+
+  while (edges != 0) {
     int point_a, point_b;
     std::cin >> point_a >> point_b;
-    graph.AddConnection(point_a, point_b);
-    --roads;
+    gr.AddEdge(point_a - 1, point_b - 1);
+    --edges;
   }
-  graph.Cycle();
+
+  gr.Print();
+
   return 0;
 }
-
-/*
-
-  int points = 2;
-  int roads = 2;
-  Graph gr(points);
-  gr.AddConnection(1, 2);
-  gr.AddConnection(1, 2);
-  gr.Cycle();
-  return 0;
-
-int points, roads;
-  std::cin >> points >> roads;
-  Graph graph(points);
-  while (roads != 0) {
-    int point_a, point_b;
-    std::cin >> point_a >> point_b;
-    graph.AddConnection(point_a, point_b);
-    --roads;
-  }
-  graph.Cycle();
-  return 0;
-*/
