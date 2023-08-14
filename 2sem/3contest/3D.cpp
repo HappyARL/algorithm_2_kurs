@@ -1,113 +1,109 @@
+#include <algorithm>
 #include <iostream>
+#include <numeric>
 #include <vector>
-#include <limits>  // Include limits for INT_MAX
+
+struct Edge {
+  int64_t from;
+  int64_t to;
+  int64_t weight;
+};
+
+class DSU {
+ private:
+  std::vector<int64_t> body_;
+  std::vector<int64_t> rang_;
+  int64_t total_val_ = 0;
+  
+ public:
+  DSU(int64_t num_of_vertexes) {
+    body_.resize(num_of_vertexes + 1);
+    rang_.resize(num_of_vertexes + 1);
+    std::iota(body_.begin(), body_.end(), 0);
+  }
+  
+  int64_t Find(int64_t vertex) {
+    int64_t node = vertex;
+    while (node != body_[node]) {
+      node = body_[node];
+    }
+    return body_[vertex] = node;
+  }
+
+  void Union(const Edge& unit) {
+    std::pair<int64_t, int64_t> two = {Find(unit.from),Find(unit.to)};
+    int64_t root = 0;
+    if (two.first == two.second) {
+      return;
+    }
+    if (rang_[two.first] > rang_[two.second]) {
+      root = body_[two.second] = two.first;
+    } else {
+      root = body_[two.first] = two.second;
+    }
+    total_val_ += unit.weight;
+    rang_[root] += static_cast<int64_t>(rang_[two.first] == rang_[two.second]);
+  }
+
+  int64_t FindTotal() const { return total_val_; }
+};
 
 class Graph {
  private:
-  std::vector<std::vector<int64_t> > adj_matrix;
-  int64_t amount;
+  DSU dsu_;
+  void SortEdges(std::vector<Edge>& edges) {
+    std::sort(edges.begin(), edges.end(), [](const Edge& left, const Edge& right) {
+      if (left.weight == right.weight) {
+        return left.from < right.from;
+      } else {
+        return left.weight < right.weight;
+      }
+    });
+  }
 
  public:
-  std::vector<int64_t> salary;
-  Graph(int64_t vertices);
+  Graph(int64_t num_of_vertexes, std::vector<Edge>& edges);
   ~Graph();
-  bool Exists(int64_t vertex_a, int64_t vertex_b);
-  void AddConnection(int64_t vertex_a, int64_t vertex_b, int64_t weight);
-  int64_t minKey(std::vector<int64_t> key, std::vector<bool> mstSet);
-  int64_t MST_PRIM();
+  int64_t sumCost() const;
 };
 
-Graph::Graph(int64_t vertices) : amount(vertices) {
-  for (int64_t i = 0; i < vertices; ++i) {
-    std::vector<int64_t> tmp(vertices, 0);
-    adj_matrix.push_back(tmp);
-  }
-  salary.resize(vertices);
-}
-
-Graph::~Graph() {}
-
-bool Graph::Exists(int64_t vertex_a, int64_t vertex_b) {
-  // Fix the condition for checking if an edge exists
-  if (adj_matrix[vertex_a][vertex_b] != 0 || adj_matrix[vertex_b][vertex_a] != 0) {
-    return true;
-  }
-  return false;
-}
-
-void Graph::AddConnection(int64_t vertex_a, int64_t vertex_b, int64_t weight) {
-  // Fix the condition for adding an edge
-  if (!Exists(vertex_a, vertex_b)) {
-    adj_matrix[vertex_a][vertex_b] = adj_matrix[vertex_b][vertex_a] = weight;
+Graph::Graph(int64_t num_of_vertexes, std::vector<Edge> &edges)  : dsu_(num_of_vertexes) {
+  SortEdges(edges);
+  for (const auto& i : edges) {
+    dsu_.Union(i);
   }
 }
 
-int64_t Graph::minKey(std::vector<int64_t> key, std::vector<bool> mstSet) {
-  int64_t min = std::numeric_limits<int64_t>::max();  // Use the correct constant
-  int64_t min_index = -1;
+Graph::~Graph() = default;
 
-  for (int64_t v = 0; v < amount; ++v) {
-    if (!mstSet[v] && key[v] < min) {
-      min = key[v];
-      min_index = v;
-    }
-  }
-
-  return min_index;
-}
-
-int64_t Graph::MST_PRIM() {
-  std::vector<int64_t> parent(amount);
-  std::vector<int64_t> key(amount, std::numeric_limits<int64_t>::max());  // Initialize with the correct constant
-  std::vector<bool> mstSet(amount, false);
-
-  key[0] = 0;
-  parent[0] = -1;
-
-  int64_t sum = 0;
-
-  for (int count = 0; count < amount - 1; count++) {
-    int u = minKey(key, mstSet);
-    mstSet[u] = true;
-
-    for (int v = 0; v < amount; ++v) {
-      if (adj_matrix[u][v] && !mstSet[v] && adj_matrix[u][v] < key[v]) {
-        sum += adj_matrix[u][v];
-        parent[v] = u;
-        key[v] = adj_matrix[u][v];
-      }
-    }
-  }
-
-  return sum;
+int64_t Graph::sumCost() const {
+  return dsu_.FindTotal();
 }
 
 int main() {
-  int64_t amount;
-  std::cin >> amount;
+  int64_t num_of_vertexes;
+  std::cin >> num_of_vertexes;
 
-  Graph graph(amount);
+  std::vector<Edge> edges;
+  edges.reserve(num_of_vertexes * num_of_vertexes);
 
-  for (int i = 0; i < amount; ++i) {
-    for (int j = 0; j < amount; ++j) {
+  for (int64_t i = 1; i <= num_of_vertexes; ++i) {
+    for (int64_t j = 1; j <= num_of_vertexes; ++j) {
       int64_t weight;
       std::cin >> weight;
-      graph.AddConnection(i, j, weight);
+      edges.push_back({i, j, weight});
     }
   }
 
-  while (amount != 0) {
-    int64_t money;
-    std::cin >> money;
-    graph.salary.push_back(money);
-    --amount;
+  for (int64_t i = 1; i <= num_of_vertexes; ++i) {
+    int64_t weight;
+    std::cin >> weight;
+    edges.push_back({i, num_of_vertexes + 1, weight});
   }
 
-  int64_t total_cost = graph.MST_PRIM();
-//  for (int64_t s : graph.salary) {
-//    total_cost += s;
-//  }
+  Graph graph(num_of_vertexes + 1, edges);
 
-  std::cout << total_cost << '\n';
+  std::cout << graph.sumCost();
+
   return 0;
 }

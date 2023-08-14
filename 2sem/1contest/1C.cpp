@@ -1,99 +1,121 @@
 #include <iostream>
 #include <vector>
 
-class Graph {
- private:
-  std::vector<std::vector<int>> adj_list_;
-  std::vector<bool> visited_;
-  std::vector<bool> recursion_stack_;
-  std::vector<int> result_;
+enum Color { WHITE, GREY, BLACK };
 
- public:
-  Graph(int vertices);
-  ~Graph();
-  bool Exists(int vec, int index);
-  void AddEdge(int up, int down);
-  bool Cycle();
-  bool DFS(int index);
-  void Print();
+struct Node {
+  Color color = Color::WHITE;
+  int64_t value = 0;
+  std::vector<int64_t> neighbour;
+  
+  void addNeighbour(const int64_t& vertex) { neighbour.push_back(vertex - 1); }
 };
 
-Graph::Graph(int vertices) {
+struct Edge {
+  int64_t from;
+  int64_t to;
+};
+
+class Graph {
+ private:
+  std::vector<Node> adj_list_;
+  std::vector<int64_t> result_;
+  int64_t vertices_num;
+
+ public:
+  Graph(const int64_t& vertices, const std::vector<Edge>& edges);
+  ~Graph();
+  void DFS(Node* cur_node, bool& found_loop, int64_t& loop_start, std::vector<int64_t>& loop);
+  bool HaveLoop(std::vector<int64_t>& res);
+  void printCycle();
+};
+
+Graph::Graph(const int64_t& vertices, const std::vector<Edge>& edges) : vertices_num(vertices) {
   adj_list_.resize(vertices);
-  visited_.resize(vertices, false);
-  recursion_stack_.resize(vertices, false);
+  for (const auto& iter : edges) {
+    adj_list_[iter.from - 1].value = iter.from - 1;
+    adj_list_[iter.from - 1].addNeighbour(iter.to);
+  }
 }
 
-Graph::~Graph() {}
+Graph::~Graph() = default;
 
-bool Graph::Exists(int vec, int index) {
-  for (const auto& iter : adj_list_[vec]) {
-    if (iter == index) {
-      return true;
+void Graph::DFS(Node* cur_node, bool& found_loop, int64_t& loop_start, std::vector<int64_t>& loop) {
+  if (cur_node->color == Color::GREY) {
+    found_loop = true;
+    loop_start = cur_node->value;
+    return;
+  }
+
+  cur_node->color = Color::GREY;
+  for (const auto& i : cur_node->neighbour) {
+    if (adj_list_[i].color != Color::BLACK) {
+      DFS(&adj_list_[i], found_loop, loop_start, loop);
+      if (found_loop) {
+        loop.push_back(i + 1);
+        if (cur_node->value == loop_start) {
+          result_ = loop;
+        }
+        return;
+      }
+      adj_list_[i].color = Color::BLACK;
     }
   }
-  return false;
+
+  cur_node->color = Color::BLACK;
 }
 
-void Graph::AddEdge(int up, int down) {
-  if (!Exists(up, down)) {
-    adj_list_[up].push_back(down);
-  }
-}
+bool Graph::HaveLoop(std::vector<int64_t>& res) {
+  std::vector<int64_t> tmp_way;
+  bool found_loop = false;
+  int64_t loop_start;
 
-bool Graph::Cycle() {
-  for (size_t v = 0; v < adj_list_.size(); ++v) {
-    if (!visited_[v] && DFS(v)) {
-      return true;
-    }
-  }
-  return false;
-}
-
-bool Graph::DFS(int index) {
-  if (recursion_stack_[index]) {
-    return true;
-  }
-
-  if (!visited_[index]) {
-    visited_[index] = true;
-    recursion_stack_[index] = true;
-    result_.push_back(index);
-
-    for (int u : adj_list_[index]) {
-      if (DFS(u)) {
+  for (auto& iter : adj_list_) {
+    if (iter.color == Color::WHITE) {
+      DFS(&iter, found_loop, loop_start, tmp_way);
+      if (found_loop) {
+        res = result_;
         return true;
       }
     }
   }
-  recursion_stack_[index] = false;
+
   return false;
 }
 
-void Graph::Print() {
-  if (Cycle()) {
-    std::cout << "YES" << '\n';
-    for (size_t i = 0; i < result_.size(); ++i) {
-      std::cout << result_[i] + 1 << " ";
-    }
-  } else {
+void Graph::printCycle() {
+  std::vector<int64_t> res;
+  bool have_loop = HaveLoop(res);
+
+  if (!have_loop) {
     std::cout << "NO" << '\n';
+    return;
+  }
+  
+  std::cout << "YES" << '\n';
+  for (int i = res.size() - 1; i >= 0; --i) {
+    std::cout << res[i] << ' ';
   }
 }
 
 int main() {
-  int vertices, edges;
-  std::cin >> vertices >> edges;
-  Graph gr(vertices);
-
-  while (edges != 0) {
-    int point_a, point_b;
-    std::cin >> point_a >> point_b;
-    gr.AddEdge(point_a - 1, point_b - 1);
-    --edges;
+  int64_t vertices_num, edges_num;
+  std::cin >> vertices_num >> edges_num;
+  
+  std::vector<Edge> edges(edges_num);
+  
+  for (int64_t i = 0; i < edges_num; ++i) {
+    std::cin >> edges[i].from >> edges[i].to;
+    if (edges[i].from == edges[i].to) {
+      std::cout << "YES" << '\n';
+      std::cout << edges[i].from << " " << edges[i].to;
+      return 0;
+    }
   }
 
-  gr.Print();
+  Graph graph(vertices_num, edges);
+  
+  graph.printCycle();
 
   return 0;
 }

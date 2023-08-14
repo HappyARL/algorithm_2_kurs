@@ -93,7 +93,7 @@ int main() {
       minAdditionalTunnels += components[i] - 1;
   }
 
-  cout << minAdditionalTunnels << endl;
+  cout << minAdditionalTunnels - 1 << endl;
 
   return 0;
 }

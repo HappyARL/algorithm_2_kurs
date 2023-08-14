@@ -72,6 +72,11 @@ void Graph::Dijkstra(int64_t start_point, int64_t max_time) {
 }
 
 void Graph::printPath(std::vector<int64_t> prev, int64_t max_time) {
+  if (time_request[vertices_num - 1] > max_time) {
+    std::cout << "-1" << '\n';
+    return;
+  }
+
   std::vector<int64_t> path;
   int64_t current_vertex = vertices_num - 1;
 
@@ -80,17 +85,6 @@ void Graph::printPath(std::vector<int64_t> prev, int64_t max_time) {
     current_vertex = prev[current_vertex];
   }
   std::reverse(path.begin(), path.end());
-
-  if (time_request[vertices_num - 1] > max_time) {
-    std::cout << "-1" << '\n';
-    return;
-  }
-
-  int64_t total_time = time_request[vertices_num - 1];
-  if (total_time > max_time) {
-    std::cout << "-1" << '\n';
-    return;
-  }
 
   std::cout << answer[vertices_num - 1] << '\n';
   std::cout << path.size() << '\n';
