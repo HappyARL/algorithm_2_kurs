@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d6e47068-8967-4316-bcd0-b9e3d6ac17b4" name="Changes" comment="add progress">
+      <change afterPath="$PROJECT_DIR$/1contest/1H.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2contest/2C_alter.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3contest/3C_review.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3contest/3F_alter.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3contest/3G.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/5contest/5P.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1A" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1B" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1C" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1G" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1I" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1J" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1contest/1C.dSYM/Contents/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1contest/1C.dSYM/Contents/Resources/DWARF/1C" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1contest/1G.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/1contest/1G.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1contest/Contents/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1contest/Contents/Resources/DWARF/1D" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1А" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2B" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2C" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2D" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2E" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2contest/2A.dSYM/Contents/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2contest/2A.dSYM/Contents/Resources/DWARF/2A" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2contest/2B-alter.dSYM/Contents/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2contest/2B-alter.dSYM/Contents/Resources/DWARF/2B-alter" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2contest/2B.dSYM/Contents/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2contest/2B.dSYM/Contents/Resources/DWARF/2B" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2contest/2E.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/2contest/2E.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3C" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3D" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3F" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3contest/3A.dSYM/Contents/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3contest/3A.dSYM/Contents/Resources/DWARF/3A" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3contest/3B.dSYM/Contents/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3contest/3B.dSYM/Contents/Resources/DWARF/3B" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3contest/3C.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/3contest/3C.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3contest/3C.dSYM/Contents/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3contest/3C.dSYM/Contents/Resources/DWARF/3C" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3contest/3F.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/3contest/3F.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3contest/3F.dSYM/Contents/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3contest/3F.dSYM/Contents/Resources/DWARF/3F" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4A" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4B" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4C" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4G" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4contest/4A.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/4contest/4A.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4contest/4B.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/4contest/4B.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4contest/4G.dSYM/Contents/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4contest/4G.dSYM/Contents/Resources/DWARF/4G" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4contest/B.dSYM/Contents/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4contest/B.dSYM/Contents/Resources/DWARF/B" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4contest/G.dSYM/Contents/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4contest/G.dSYM/Contents/Resources/DWARF/G" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4contest/sem12.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4contest/test.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5H" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5contest/5A.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/5contest/5A.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/5contest/5O.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/5contest/5O.cpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2OeTubzQNBM7vsriBt0aLZXI32h" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/arlan/Documents/learning_code/algorithm_2_kurs/2sem",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.sourceCode.C/C++",
+    "structure.view.defaults.are.configured": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="C/C++ File.3G.cpp">
+    <configuration name="1G.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="2sem" TARGET_NAME="1G.cpp" CONFIG_NAME="1G.cpp">
+      <option name="compilerOptions" value="-pedantic -Werror -Wextra -fsanitize=address -fsanitize=undefined -std=c++20" />
+      <option name="sourceFile" value="1contest/1G.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="2C.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="2sem" TARGET_NAME="2C.cpp" CONFIG_NAME="2C.cpp">
+      <option name="compilerOptions" value="-pedantic -Werror -Wextra -fsanitize=address -fsanitize=undefined -std=c++20" />
+      <option name="sourceFile" value="2contest/2C.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="2E_alter.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="2sem" TARGET_NAME="2E_alter.cpp" CONFIG_NAME="2E_alter.cpp">
+      <option name="compilerOptions" value="-pedantic -Werror -Wextra -fsanitize=address -fsanitize=undefined -std=c++20" />
+      <option name="sourceFile" value="2contest/2E_alter.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="3F_alter.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="2sem" TARGET_NAME="3F_alter.cpp" CONFIG_NAME="3F_alter.cpp">
+      <option name="compilerOptions" value="-pedantic -Werror -Wextra -fsanitize=address -fsanitize=undefined -std=c++20" />
+      <option name="sourceFile" value="3contest/3F_alter.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="3F.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="2sem" TARGET_NAME="3F.cpp" CONFIG_NAME="3F.cpp">
+      <option name="compilerOptions" value="-pedantic -Werror -Wextra -fsanitize=address -fsanitize=undefined -std=c++20" />
+      <option name="sourceFile" value="3contest/3F.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="3G.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="2sem" TARGET_NAME="3G.cpp" CONFIG_NAME="3G.cpp">
+      <option name="compilerOptions" value="-pedantic -Werror -Wextra -fsanitize=address -fsanitize=undefined -std=c++20" />
+      <option name="sourceFile" value="3contest/3G.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <option name="compilerOptions" value="-pedantic -Werror -Wextra -fsanitize=address -fsanitize=undefined -std=c++20" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="2sem" TARGET_NAME="B.cpp" CONFIG_NAME="cpp">
+      <option name="compilerOptions" value="-pedantic -Werror -Wextra -fsanitize=address -fsanitize=undefined -std=c++20" />
+      <option name="sourceFile" value="4contest/B.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="2sem" TARGET_NAME="test.cpp" CONFIG_NAME="test.cpp">
+      <option name="compilerOptions" value="-std=c++2b" />
+      <option name="sourceFile" value="test.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="C/C++ File.test.cpp" />
+      <item itemvalue="C/C++ File.cpp" />
+      <item itemvalue="C/C++ File.3F.cpp" />
+      <item itemvalue="C/C++ File.1G.cpp" />
+      <item itemvalue="C/C++ File.2C.cpp" />
+      <item itemvalue="C/C++ File.2E_alter.cpp" />
+      <item itemvalue="C/C++ File.3F_alter.cpp" />
+      <item itemvalue="C/C++ File.3G.cpp" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="C/C++ File.3G.cpp" />
+        <item itemvalue="C/C++ File.3F_alter.cpp" />
+        <item itemvalue="C/C++ File.1G.cpp" />
+        <item itemvalue="C/C++ File.2E_alter.cpp" />
+        <item itemvalue="C/C++ File.2C.cpp" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d6e47068-8967-4316-bcd0-b9e3d6ac17b4" name="Changes" comment="" />
+      <created>1681920271892</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1681920271892</updated>
+      <workItem from="1681920272916" duration="164000" />
+      <workItem from="1681920441986" duration="1073000" />
+      <workItem from="1681924034646" duration="34000" />
+      <workItem from="1681924073254" duration="4000" />
+      <workItem from="1681924081813" duration="569000" />
+      <workItem from="1681994898819" duration="1378000" />
+      <workItem from="1682372487721" duration="224000" />
+      <workItem from="1683068808652" duration="4000" />
+      <workItem from="1683474346809" duration="7631000" />
+      <workItem from="1683482523759" duration="16439000" />
+      <workItem from="1683542753266" duration="8207000" />
+      <workItem from="1684876120433" duration="1210000" />
+      <workItem from="1684930974388" duration="3413000" />
+      <workItem from="1685048467653" duration="1377000" />
+      <workItem from="1685099752450" duration="61000" />
+      <workItem from="1685111213762" duration="2452000" />
+      <workItem from="1685548840019" duration="3000" />
+      <workItem from="1687371163317" duration="14000" />
+      <workItem from="1688722940848" duration="12250000" />
+      <workItem from="1691145307710" duration="6747000" />
+      <workItem from="1691216898380" duration="14006000" />
+      <workItem from="1691305454203" duration="18368000" />
+      <workItem from="1691406011460" duration="8907000" />
+      <workItem from="1691487263730" duration="8757000" />
+      <workItem from="1691572819166" duration="12382000" />
+      <workItem from="1691652195613" duration="21704000" />
+      <workItem from="1691738223348" duration="13499000" />
+      <workItem from="1691837749153" duration="17132000" />
+      <workItem from="1691910817911" duration="22207000" />
+      <workItem from="1691999175787" duration="5750000" />
+      <workItem from="1692032107988" duration="4415000" />
+      <workItem from="1692098343858" duration="9749000" />
+      <workItem from="1692111120956" duration="322000" />
+      <workItem from="1692111773075" duration="2152000" />
+      <workItem from="1692117842498" duration="1168000" />
+      <workItem from="1692170000101" duration="521000" />
+      <workItem from="1692209784215" duration="3175000" />
+      <workItem from="1692275239765" duration="6871000" />
+      <workItem from="1692339676424" duration="30517000" />
+    </task>
+    <task id="LOCAL-00001" summary="add progress">
+      <created>1681920542526</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1681920542526</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add progress">
+      <created>1681920578613</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1681920578613</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add progress">
+      <created>1683475618081</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1683475618081</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="add progress" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

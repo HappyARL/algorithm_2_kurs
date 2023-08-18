@@ -55,10 +55,10 @@ void Tree::AddEdge(int64_t vertex_a, int64_t vertex_b) {
 
 void Tree::SparseTable() {
   auto length = (int64_t)Height_.size();
-  for (int i = 0; i < length; i++) {
+  for (int i = 0; i < log2(length) + 1; i++) {
     sparse_table_[i][0] = Height_[i];
   }
-  for (int i = 1; i <= length; i++) {
+  for (int i = 1; i <= log2(length) + 1; i++) {
     for (int j = 0; (j + (1 << i)) <= length; j++) {
       sparse_table_[i][j] = std::min(sparse_table_[i - 1][j],
                                      sparse_table_[i - 1][j + (1 << (i - 1))]);
@@ -81,7 +81,7 @@ void Tree::DFS(int64_t index, int64_t height) {
   ETT_.push_back(index);
   Height_.push_back(height);
   for (size_t j = 0; j < edges_[index].size(); ++j) {
-    int64_t i = edges_[index][j];
+    int i = edges_[index].at(j);
     if (!visited_[i]) {
       height++;
       DFS(i, height);
@@ -117,7 +117,7 @@ int main() {
   }
   int64_t requests;
   std::cin >> requests;
-  tree.DFS(0, 0);
+  tree.DFS(0, 1);
   tree.SparseTable();
   while (requests != 0) {
     int64_t vertex_a, vertex_b;

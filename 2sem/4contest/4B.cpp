@@ -1,65 +1,95 @@
 #include <iostream>
-#include <utility>
 #include <vector>
 
-class Graph {
+class LanguageGraph {
  private:
-  std::vector<std::vector<int64_t> > adj_list_;
-  std::vector<int64_t> match_;
-  std::vector<int64_t> visited_;
+  std::vector<std::vector<int64_t> > adjList;
+  std::vector<int64_t> match;
+  std::vector<bool> visited;
+  int64_t numLanguages;
+  int64_t numWords;
 
  public:
-  Graph(int64_t vert_num, int64_t edge_num, std::vector<std::vector<int64_t> > edges);
-  ~Graph();
-  bool DFS(int64_t vertex);
+  LanguageGraph(int64_t languages, int64_t words);
+  ~LanguageGraph();
+  bool findAugmentingPath(int64_t lang);
+  void addWord(int64_t lang, int64_t word);
+  void findMaxMatching();
+  void printMatching();
 };
 
-bool Graph::DFS(int64_t u) {
-  if (visited_[u]) {
+LanguageGraph::LanguageGraph(int64_t languages, int64_t words) : numLanguages(languages), numWords(words) {
+  adjList.resize(languages + 1);
+  match.resize(words + 1, -1);
+  visited.resize(languages + 1, false);
+}
+
+LanguageGraph::~LanguageGraph() = default;
+
+bool LanguageGraph::findAugmentingPath(int64_t lang) {
+  if (visited[lang]) {
     return false;
   }
-  visited_[u] = true;
-  for (int v : adj_list_[u]) {
-    if (match_[v] == -1 || DFS(match_[v])) {
-      match_[v] = u;
+
+  visited[lang] = true;
+
+  for (const auto& word : adjList[lang]) {
+    if (match[word] == -1 || findAugmentingPath(match[word])) {
+      match[word] = lang;
       return true;
     }
   }
+
   return false;
 }
 
-Graph::Graph(int64_t left_size, int64_t right_size,
-             std::vector<std::vector<int64_t> > edges) : adj_list_(std::move(edges)) {
-  int ans = 0;
-  match_.resize(right_size + left_size, -1);
-  for (int64_t i = 0; i < left_size; ++i) {
-    visited_.resize(left_size + right_size, false);
-    if (DFS(i)) {
-      ++ans;
-    }
-  }
-  std::cout << ans << '\n';
-  for (int64_t i = 0; i < right_size + left_size; ++i) {
-    if (match_[i] != -1) {
-      std::cout << match_[i] + 1 << " " << i - left_size + 1 << '\n';
+void LanguageGraph::addWord(int64_t lang, int64_t word) {
+  adjList[lang].push_back(word);
+}
+
+void LanguageGraph::findMaxMatching() {
+  for (int64_t i = 1; i <= numLanguages; ++i) {
+    if (findAugmentingPath(i)) {
+      std::fill(visited.begin(), visited.end(), false);
     }
   }
 }
 
-Graph::~Graph() {}
+void LanguageGraph::printMatching() {
+  int64_t matchingCount = 0;
 
-int main() {
-  int64_t english_words, chinese_words;
-  std::cin >> english_words >> chinese_words;
-  std::vector<std::vector<int64_t> > edges(english_words);
-  for (int64_t i = 0; i < english_words; ++i) {
-    int64_t vertex;
-    std::cin >> vertex;
-    while (vertex != 0) {
-      edges[i].push_back(vertex - 1 + english_words);
-      std::cin >> vertex;
+  for (int64_t i = 1; i <= numWords; ++i) {
+    if (match[i] != -1) {
+      ++matchingCount;
     }
   }
-  Graph graph(english_words, chinese_words, edges);
+
+  std::cout << matchingCount << '\n';
+  for (int64_t i = 1; i <= numWords; ++i) {
+    if (match[i] == -1) {
+      continue;
+    }
+    std::cout << match[i] << ' ' << i << '\n';
+  }
+}
+
+int main() {
+  int64_t numLanguages, numWords;
+  std::cin >> numLanguages >> numWords;
+
+  LanguageGraph graph(numLanguages, numWords);
+
+  for (int64_t i = 1; i <= numLanguages; ++i) {
+    int64_t word;
+    std::cin >> word;
+    while (word != 0) {
+      graph.addWord(i, word);
+      std::cin >> word;
+    }
+  }
+
+  graph.findMaxMatching();
+  graph.printMatching();
+
   return 0;
 }

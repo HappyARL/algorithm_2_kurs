@@ -1,78 +1,59 @@
-// original - https://e-maxx.ru/algo/bridge_searching
-
-#include <algorithm>
 #include <iostream>
 #include <vector>
 
 struct Edge {
   int64_t from;
   int64_t to;
-  int64_t order;
+  int64_t count;
 
-  Edge(int64_t ver_from, int64_t ver_to, int64_t count = -1) : from(ver_from), to(ver_to), order(count) {}
-  bool operator==(const Edge& other) const {
-    if (this->from == other.from && this->to == other.to) {
-      return true;
-    }
-    return false;
+  bool operator<(const Edge& other) const {
+    return count < other.count;
   }
 };
 
 class Graph {
  private:
-  std::vector<std::vector<int64_t> > adj_list;
+  std::vector<Edge> adjList;
   std::vector<bool> used;
   std::vector<int64_t> tin;
   std::vector<int64_t> tup;
-  std::vector<Edge> edge_list;
-  std::vector<int64_t> answer;
-  int64_t vertices_num;
+  std::vector<Edge> answer;
+  int64_t vertices;
   int64_t timer;
 
  public:
-  Graph(int64_t vertices);
+  Graph(int64_t vertex_num);
   ~Graph();
-  void addEdge(int64_t ver_a, int64_t ver_b, int64_t count);
-  void DFS(int64_t index, int64_t p = -1);
+  void addEdge(const Edge& edge);
+  void DFS(const Edge& edge, int64_t pos = -1);
   void findBridges();
-  void printBridge();
+  void printBridges();
 };
 
-Graph::Graph(int64_t vertices) : vertices_num(vertices) {
-  adj_list.resize(vertices);
+Graph::Graph(int64_t vertex_num) : vertices(vertex_num) {
   used.resize(vertices, false);
-  tin.resize(vertices);
-  tup.resize(vertices);
+  tin.resize(vertices, -1);
+  tup.resize(vertices, -1);
 }
 
 Graph::~Graph() = default;
 
-void Graph::addEdge(int64_t ver_a, int64_t ver_b, int64_t count) {
-  adj_list[ver_a].push_back(ver_b);
-  adj_list[ver_b].push_back(ver_a);
-  edge_list.emplace_back(Edge(ver_a, ver_b, count));
+void Graph::addEdge(const Edge &edge) {
+  adjList.push_back(edge);
 }
 
-void Graph::DFS(int64_t index, int64_t p) {
-  used[index] = true;
-  tin[index] = tup[index] = timer++;
-  for (size_t i = 0; i < adj_list[index].size(); ++i) {
-    int64_t to = adj_list[index][i];
-    if (to == p) {
-      continue;
-    }
-    if (used[to])
-      tup[index] = std::min(tup[index], tin[to]);
-    else {
-      DFS (to, index);
-      tup[index] = std::min(tup[index], tup[to]);
-      if (tup[to] > tin[index]) {
-        Edge bridge(index, to);
-        for (const auto& iter : edge_list) {
-          if (iter == bridge) {
-            answer.push_back(iter.order);
-          }
-        }
+void Graph::DFS(const Edge& edge, int64_t pos) {
+  used[edge.from] = true;
+  tin[edge.from] = tup[edge.from] = timer++;
+  for (const auto& iter : adjList) {
+    if (iter.from == pos) continue; // Fix 1
+    if (used[iter.to]) {
+      tup[edge.from] = std::min(tup[edge.from], tin[iter.to]);
+    } else {
+      DFS(iter, iter.from); // Fix 2
+      tup[edge.from] = std::min(tup[edge.from], tup[iter.to]);
+      if (tup[iter.to] > tin[iter.from]) { // Fix 3
+        answer.push_back(edge);
       }
     }
   }
@@ -80,40 +61,37 @@ void Graph::DFS(int64_t index, int64_t p) {
 
 void Graph::findBridges() {
   timer = 0;
-  for (int64_t i = 0; i < vertices_num; ++i) {
-    used[i] = false;
-  }
-  for (int64_t i = 0; i < vertices_num; ++i) {
+  for (int64_t i = 0; i < vertices; ++i) {
     if (!used[i]) {
       DFS(i);
     }
   }
-  printBridge();
+  printBridges();
 }
 
-void Graph::printBridge() {
+void Graph::printBridges() {
   std::sort(answer.begin(), answer.end());
 
   std::cout << answer.size() << '\n';
   for (const auto& iter : answer) {
-    std::cout << iter + 1 << " ";
+    std::cout << iter.count << " ";
   }
   std::cout << '\n';
 }
 
 int main() {
-  int64_t vertices, edges;
-  std::cin >> vertices >> edges;
-  int64_t count = 0;
+  int64_t vertex_num, edge_num;
+  std::cin >> vertex_num >> edge_num;
 
-  Graph graph(vertices);
+  Graph graph(vertex_num);
+  int count = 1;
 
-  while (edges != 0) {
-    int64_t vertex_a, vertex_b;
-    std::cin >> vertex_a >> vertex_b;
-    graph.addEdge(vertex_a - 1, vertex_b - 1, count);
+  while (edge_num != 0) {
+    int64_t from, to;
+    std::cin >> from >> to;
+    graph.addEdge({from - 1, to - 1, count});
     ++count;
-    --edges;
+    --edge_num;
   }
 
   graph.findBridges();
