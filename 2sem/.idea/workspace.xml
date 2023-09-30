@@ -10,65 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6e47068-8967-4316-bcd0-b9e3d6ac17b4" name="Changes" comment="add progress">
-      <change afterPath="$PROJECT_DIR$/1contest/1H.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2contest/2C_alter.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3contest/3C_review.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3contest/3F_alter.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3contest/3G.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/5contest/5P.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1A" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1B" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1C" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1G" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1I" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1J" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1contest/1C.dSYM/Contents/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1contest/1C.dSYM/Contents/Resources/DWARF/1C" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1contest/1G.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/1contest/1G.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1contest/Contents/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1contest/Contents/Resources/DWARF/1D" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1А" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2B" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2C" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2D" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2E" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2contest/2A.dSYM/Contents/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2contest/2A.dSYM/Contents/Resources/DWARF/2A" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2contest/2B-alter.dSYM/Contents/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2contest/2B-alter.dSYM/Contents/Resources/DWARF/2B-alter" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2contest/2B.dSYM/Contents/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2contest/2B.dSYM/Contents/Resources/DWARF/2B" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2contest/2E.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/2contest/2E.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3C" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3D" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3F" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3contest/3A.dSYM/Contents/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3contest/3A.dSYM/Contents/Resources/DWARF/3A" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3contest/3B.dSYM/Contents/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3contest/3B.dSYM/Contents/Resources/DWARF/3B" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3contest/3C.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/3contest/3C.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3contest/3C.dSYM/Contents/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3contest/3C.dSYM/Contents/Resources/DWARF/3C" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3contest/3F.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/3contest/3F.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3contest/3F.dSYM/Contents/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3contest/3F.dSYM/Contents/Resources/DWARF/3F" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4A" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4B" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4C" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4G" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4contest/4A.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/4contest/4A.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/4contest/4B.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/4contest/4B.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/4contest/4G.dSYM/Contents/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4contest/4G.dSYM/Contents/Resources/DWARF/4G" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4contest/B.dSYM/Contents/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4contest/B.dSYM/Contents/Resources/DWARF/B" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4contest/G.dSYM/Contents/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4contest/G.dSYM/Contents/Resources/DWARF/G" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4contest/sem12.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4contest/test.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/5H" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/5contest/5A.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/5contest/5A.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/5contest/5O.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/5contest/5O.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,25 +28,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/arlan/Documents/learning_code/algorithm_2_kurs/2sem",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.sourceCode.C/C++",
-    "structure.view.defaults.are.configured": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/arlan/Documents/learning_code/algorithm_2_kurs/2sem&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.C/C++&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="C/C++ File.3G.cpp">
     <configuration name="1G.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="2sem" TARGET_NAME="1G.cpp" CONFIG_NAME="1G.cpp">
       <option name="compilerOptions" value="-pedantic -Werror -Wextra -fsanitize=address -fsanitize=undefined -std=c++20" />
@@ -234,7 +176,10 @@
       <workItem from="1692170000101" duration="521000" />
       <workItem from="1692209784215" duration="3175000" />
       <workItem from="1692275239765" duration="6871000" />
-      <workItem from="1692339676424" duration="30517000" />
+      <workItem from="1692339676424" duration="30565000" />
+      <workItem from="1694025831971" duration="8000" />
+      <workItem from="1694341800445" duration="2000" />
+      <workItem from="1694603148725" duration="3000" />
     </task>
     <task id="LOCAL-00001" summary="add progress">
       <created>1681920542526</created>
